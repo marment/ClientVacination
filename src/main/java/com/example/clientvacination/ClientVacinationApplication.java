@@ -30,9 +30,9 @@ public class ClientVacinationApplication {
 
         return args -> {
 
-            // Stream of lycée names
-            // List of lycée names
-            List<String> lycéeNamesList = Arrays.asList("Lycée (Kandy)", "Lycée abi hayan lycee taouhidi", "Lycée bnou alyassamine", "Lycée taha houssein", "Lycée bnou el arabi");
+            // Stream of Centres names
+            // List of centres adresses
+            List<String> lycéeNamesList = Arrays.asList("Lycée Kandy", "Lycée abi hayan lycee taouhidi", "Lycée bnou alyassamine", "Lycée taha houssein", "Lycée bnou el arabi");
 
             // List of addresses
             List<String> addressesList = Arrays.asList("Sbata (arrondissement)", "Bouskoura(mairie)",

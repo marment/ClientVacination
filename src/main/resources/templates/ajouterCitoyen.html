@@ -26,7 +26,7 @@
                     <input type="hidden" name="centreVaccinationId" th:value="${selectedCentre.id}">
                 </div>
                 <button type="submit" class="btn btn-success">Save</button>
-                <a th:href="@{/citoyens/centre?id=${selectedCentre.id}}" class="btn btn-secondary">Back</a>
+                <a th:href="@{citoyens/centre(id=${selectedCentre.id})}" class="btn btn-secondary">Back</a>
             </form>
         </div>
     </div>

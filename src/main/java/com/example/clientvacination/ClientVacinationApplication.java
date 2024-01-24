@@ -5,6 +5,7 @@ import com.example.clientvacination.dao.citoyenRepository;
 
 import com.example.clientvacination.entities.CentreVaccination;
 import com.example.clientvacination.entities.Citoyen;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -28,7 +29,7 @@ public class ClientVacinationApplication {
 
 
         return args -> {
-/*
+
             // Stream of lycée names
             // List of lycée names
             List<String> lycéeNamesList = Arrays.asList("Lycée (Kandy)", "Lycée abi hayan lycee taouhidi", "Lycée bnou alyassamine", "Lycée taha houssein", "Lycée bnou el arabi");
@@ -53,7 +54,7 @@ public class ClientVacinationApplication {
                 centreVaccinationRepository.save(centreVaccination);
             });
 
-           *//* Stream.of("Sbata (arrondissement)","Bouskoura(mairie)","Hay hassani\\n\" +\n" +
+          /*  Stream.of("Sbata (arrondissement)","Bouskoura(mairie)","Hay hassani\\n\" +\n" +
                     "                            \"(arrondissement)","El fida (arrondissement)","Ain chock (arrondissement)");
             Stream.of("Lycée (Kandy)", "Lycée abi hayan" +
                             "lycee taouhidi", "Lycée bnou" +
@@ -62,14 +63,14 @@ public class ClientVacinationApplication {
                         CentreVaccination centreVaccination = new CentreVaccination();
                         centreVaccination.setNom(name);
                         centreVaccinationRepository.save(centreVaccination);
-                    });*//*
-           *//* Stream.of("Fati", "Halima", "Yassin","Haytam","Asmae","Chaimae","Jade","Hiba")
+                    });
+            Stream.of("Fati", "Halima", "Yassin","Haytam","Asmae","Chaimae","Jade","Hiba")
                     .forEach(name -> {
                         Citoyen citoyen = new Citoyen();
                         citoyen.setNom(name);
                         citoyenRepository.save(citoyen);
-                    });*//*
-
+                    });
+*/
             List<String> namesList = Arrays.asList("Fati", "Halima", "Yassin", "Haytam", "Asmae", "Chaimae", "Jade", "Hiba");
 
 // Create a mapping between names and centers
@@ -84,14 +85,28 @@ public class ClientVacinationApplication {
 // For each client, create a new Citoyen entity and associate it with the vaccine center's name
             clientCentreMap.forEach((client, centre) -> {
                 if (client != null && centre != null) {
-                    // Create a new Citoyen entity and associate it with the vaccine center
                     Citoyen citoyen = new Citoyen();
                     citoyen.setNom(client);
-                    // Set the CentreVaccination directly, no need for a separate variable
-                    citoyen.setCentreVaccination(centreVaccinationRepository.findByNom(centre).orElse(null));
+
+                    // Utilisez .stream().findFirst().orElse(null) pour obtenir le premier élément ou null
+                    CentreVaccination centreVaccination = centreVaccinationRepository.findByNom(centre).stream().findFirst().orElse(null);
+
+                    if (centreVaccination == null) {
+                        // Handle the case where the CentreVaccination is not found
+                        // You may log a warning or throw an exception depending on your requirements
+                        throw new EntityNotFoundException("CentreVaccination not found for name: " + centre);
+                    }
+
+                    citoyen.setCentreVaccination(centreVaccination);
+
+                    // Set the name of the CentreVaccination
+                    String centreName = centreVaccination.getNom();
                     citoyenRepository.save(citoyen);
                 }
-            });*/
+            });
+
+
+
 
         };
 

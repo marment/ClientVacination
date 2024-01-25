@@ -1,10 +1,10 @@
-HELP.md
+# Ignore compiled bytecode and build output
 target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
 
-### STS ###
+# STS (Spring Tool Suite) specific files
 .apt_generated
 .classpath
 .factorypath
@@ -13,13 +13,13 @@ target/
 .springBeans
 .sts4-cache
 
-### IntelliJ IDEA ###
+# IntelliJ IDEA specific files
 .idea
 *.iws
 *.iml
 *.ipr
 
-### NetBeans ###
+# NetBeans specific files
 /nbproject/private/
 /nbbuild/
 /dist/
@@ -29,5 +29,9 @@ build/
 !**/src/main/**/build/
 !**/src/test/**/build/
 
-### VS Code ###
+# VS Code specific files
 .vscode/
+
+# Exclude all JAR files except ClientVacination-0.0.1-SNAPSHOT.jar
+*.jar
+!ClientVacination-0.0.1-SNAPSHOT.jar

@@ -27,12 +27,7 @@ public class citoyenController {
 
 
 
-     /*   @GetMapping("/T")
-        public String afficherCitoyens( Model model) {
-            Collection<Citoyen> citoyens = citoyenService.afficherCitoyens();
-            model.addAttribute("citoyens", citoyens);
-            return "viewt";
-        }*/
+
      @GetMapping("/")
      public String afficherCentres(Model model,
                                    @RequestParam(name = "page", defaultValue = "0") int page,
@@ -131,18 +126,7 @@ public class citoyenController {
             centreVaccinationRepository.deleteById(id);
             return "redirect:/";
         }
-           /*  @PostMapping("/saveCitoyen")
-        public String saveCitoyen(@RequestParam String nom, @RequestParam Long centreVaccinationId) {
-            CentreVaccination centreVaccination = centreVaccinationRepository.findById(centreVaccinationId)
-                    .orElseThrow(() -> new IllegalArgumentException("Invalid CentreVaccination Id: " + centreVaccinationId));
 
-            Citoyen citoyen = new Citoyen();
-            citoyen.setNom(nom);
-            citoyen.setCentreVaccination(centreVaccination);
-
-            citoyenService.ajouterCitoyen(citoyen);
-            return "redirect:/";
-        }*/
 
 
     }

@@ -54,26 +54,10 @@ public class ClientVacinationApplication {
                 centreVaccinationRepository.save(centreVaccination);
             });
 
-          /*  Stream.of("Sbata (arrondissement)","Bouskoura(mairie)","Hay hassani\\n\" +\n" +
-                    "                            \"(arrondissement)","El fida (arrondissement)","Ain chock (arrondissement)");
-            Stream.of("Lycée (Kandy)", "Lycée abi hayan" +
-                            "lycee taouhidi", "Lycée bnou" +
-                            "alyassamine","Lycée taha houssein","Lycée bnou el arabi")
-                    .forEach(name -> {
-                        CentreVaccination centreVaccination = new CentreVaccination();
-                        centreVaccination.setNom(name);
-                        centreVaccinationRepository.save(centreVaccination);
-                    });
-            Stream.of("Fati", "Halima", "Yassin","Haytam","Asmae","Chaimae","Jade","Hiba")
-                    .forEach(name -> {
-                        Citoyen citoyen = new Citoyen();
-                        citoyen.setNom(name);
-                        citoyenRepository.save(citoyen);
-                    });
-*/
+
             List<String> namesList = Arrays.asList("Fati", "Halima", "Yassin", "Haytam", "Asmae", "Chaimae", "Jade", "Hiba");
 
-// Create a mapping between names and centers
+            // Create a mapping between names and centers
             Map<String, String> clientCentreMap = IntStream.range(0, Math.min(namesList.size(), lycéeNamesList.size()))
                     .boxed().collect(Collectors.toMap(
                             i -> namesList.get(i),
@@ -82,7 +66,7 @@ public class ClientVacinationApplication {
                             LinkedHashMap::new // Preserve the order of insertion
                     ));
 
-// For each client, create a new Citoyen entity and associate it with the vaccine center's name
+            // For each client, create a new Citoyen entity and associate it with the vaccine center's name
             clientCentreMap.forEach((client, centre) -> {
                 if (client != null && centre != null) {
                     Citoyen citoyen = new Citoyen();
